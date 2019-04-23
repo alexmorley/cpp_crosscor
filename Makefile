@@ -9,4 +9,5 @@ test:
 	python test.py
 
 clean:
-	rm -f *so _*cpp
+	rm -f *so _*cpp 
+	rm -rf build/*
