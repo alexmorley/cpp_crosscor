@@ -47,12 +47,19 @@ void cross_correlation(double * X, double * Y, double * bins, int * C,
                        int size_x, int size_y, int size_bins, int size_c) {
     double diff;
     for (int yi=0; yi<size_y; ++yi){
-        for (int bi=0; bi+1<size_bins; ++bi){
-            for (int xi=0; xi<size_x; ++xi){
-                diff = X[xi] - Y[yi];
+        for (int xi=0; xi<size_x; ++xi){
+            diff = X[xi] - Y[yi];
+            if (diff > bins[size_bins-1]) {
+                continue;
+            }
+            if (diff < bins[0]) {
+                continue;
+            }
+            for (int bi=0; bi<size_bins-1; ++bi){
                 if(diff <= bins[bi+1]) {
                     if(diff > bins[bi]) {
                         C[bi] = C[bi] + 1;
+                        break;
                     }
                 }
             }

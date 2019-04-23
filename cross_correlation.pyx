@@ -32,13 +32,13 @@ def cross_correlation_func(
 
 import numpy as np2
 
-def crosscor(X, Y, max_dt, dt_step=1, bins=False):
+def crosscor(X, Y, max_dt, dt_step=1, return_bins=False):
     min_dt = -max_dt
-    bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)
-    C = np2.zeros(len(bins),dtype=np2.int32)
+    bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)
+    C = np2.zeros(len(bins)-1,dtype=np2.int32)
     C = cross_correlation_func(np2.array(X,dtype=np2.float64), 
             np2.array(Y,dtype=np2.float64), bins, C)
-    if bins:
+    if return_bins:
         return bins,C
     else:
         return C

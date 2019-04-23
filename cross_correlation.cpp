@@ -2109,7 +2109,7 @@ static PyObject *__pyx_pf_17cross_correlation_cross_correlation_func(CYTHON_UNUS
  * 
  * def crosscor(X, Y, max_dt, dt_step=1, bins=False):             # <<<<<<<<<<<<<<
  *     min_dt = -max_dt
- *     bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)
+ *     bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)
  */
 
 /* Python wrapper */
@@ -2236,8 +2236,8 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
  * 
  * def crosscor(X, Y, max_dt, dt_step=1, bins=False):
  *     min_dt = -max_dt             # <<<<<<<<<<<<<<
- *     bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)
- *     C = np2.zeros(len(bins),dtype=np2.int32)
+ *     bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)
+ *     C = np2.zeros(len(bins)-1,dtype=np2.int32)
  */
   __pyx_t_1 = PyNumber_Negative(__pyx_v_max_dt); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2247,8 +2247,8 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
   /* "cross_correlation.pyx":37
  * def crosscor(X, Y, max_dt, dt_step=1, bins=False):
  *     min_dt = -max_dt
- *     bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)             # <<<<<<<<<<<<<<
- *     C = np2.zeros(len(bins),dtype=np2.int32)
+ *     bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)             # <<<<<<<<<<<<<<
+ *     C = np2.zeros(len(bins)-1,dtype=np2.int32)
  *     C = cross_correlation_func(np2.array(X,dtype=np2.float64),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
@@ -2261,48 +2261,50 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_arange); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_v_max_dt, __pyx_v_dt_step); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_min_dt);
   __Pyx_GIVEREF(__pyx_v_min_dt);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_min_dt);
-  __Pyx_INCREF(__pyx_v_max_dt);
-  __Pyx_GIVEREF(__pyx_v_max_dt);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_max_dt);
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 37, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_step, __pyx_v_dt_step) < 0) __PYX_ERR(1, 37, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 37, __pyx_L1_error)
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_min_dt);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_step, __pyx_v_dt_step) < 0) __PYX_ERR(1, 37, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 37, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_5);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5);
   __pyx_t_5 = 0;
   __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_3) < 0) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF_SET(__pyx_v_bins, __pyx_t_3);
   __pyx_t_3 = 0;
 
   /* "cross_correlation.pyx":38
  *     min_dt = -max_dt
- *     bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)
- *     C = np2.zeros(len(bins),dtype=np2.int32)             # <<<<<<<<<<<<<<
+ *     bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)
+ *     C = np2.zeros(len(bins)-1,dtype=np2.int32)             # <<<<<<<<<<<<<<
  *     C = cross_correlation_func(np2.array(X,dtype=np2.float64),
  *             np2.array(Y,dtype=np2.float64), bins, C)
  */
@@ -2312,49 +2314,49 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_6 = PyObject_Length(__pyx_v_bins); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(1, 38, __pyx_L1_error)
-  __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_3 = PyInt_FromSsize_t((__pyx_t_6 - 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 38, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_3);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
   __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int32); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int32); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_1) < 0) __PYX_ERR(1, 38, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(1, 38, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_C = __pyx_t_1;
-  __pyx_t_1 = 0;
+  __pyx_v_C = __pyx_t_4;
+  __pyx_t_4 = 0;
 
   /* "cross_correlation.pyx":39
- *     bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)
- *     C = np2.zeros(len(bins),dtype=np2.int32)
+ *     bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)
+ *     C = np2.zeros(len(bins)-1,dtype=np2.int32)
  *     C = cross_correlation_func(np2.array(X,dtype=np2.float64),             # <<<<<<<<<<<<<<
  *             np2.array(Y,dtype=np2.float64), bins, C)
  *     if bins:
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cross_correlation_func); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 39, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_array); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 39, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 39, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_X);
   __Pyx_GIVEREF(__pyx_v_X);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_X);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_X);
   __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np2); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 39, __pyx_L1_error)
@@ -2364,14 +2366,14 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_8) < 0) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 39, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cross_correlation.pyx":40
- *     C = np2.zeros(len(bins),dtype=np2.int32)
+ *     C = np2.zeros(len(bins)-1,dtype=np2.int32)
  *     C = cross_correlation_func(np2.array(X,dtype=np2.float64),
  *             np2.array(Y,dtype=np2.float64), bins, C)             # <<<<<<<<<<<<<<
  *     if bins:
@@ -2379,8 +2381,8 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 40, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -2396,9 +2398,9 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_9) < 0) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -2416,9 +2418,9 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[5] = {__pyx_t_5, __pyx_t_8, __pyx_t_9, __pyx_v_bins, __pyx_v_C};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 39, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   } else
@@ -2426,9 +2428,9 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[5] = {__pyx_t_5, __pyx_t_8, __pyx_t_9, __pyx_v_bins, __pyx_v_C};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 39, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   } else
@@ -2451,13 +2453,13 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
     PyTuple_SET_ITEM(__pyx_t_2, 3+__pyx_t_10, __pyx_v_C);
     __pyx_t_8 = 0;
     __pyx_t_9 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 39, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF_SET(__pyx_v_C, __pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(__pyx_v_C, __pyx_t_4);
+  __pyx_t_4 = 0;
 
   /* "cross_correlation.pyx":41
  *     C = cross_correlation_func(np2.array(X,dtype=np2.float64),
@@ -2477,16 +2479,16 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
  *         return C
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 42, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 42, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_v_bins);
     __Pyx_GIVEREF(__pyx_v_bins);
-    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_bins);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_bins);
     __Pyx_INCREF(__pyx_v_C);
     __Pyx_GIVEREF(__pyx_v_C);
-    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_C);
-    __pyx_r = __pyx_t_1;
-    __pyx_t_1 = 0;
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_C);
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
     goto __pyx_L0;
 
     /* "cross_correlation.pyx":41
@@ -2517,7 +2519,7 @@ static PyObject *__pyx_pf_17cross_correlation_2crosscor(CYTHON_UNUSED PyObject *
  * 
  * def crosscor(X, Y, max_dt, dt_step=1, bins=False):             # <<<<<<<<<<<<<<
  *     min_dt = -max_dt
- *     bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)
+ *     bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)
  */
 
   /* function exit code */
@@ -5769,7 +5771,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * def crosscor(X, Y, max_dt, dt_step=1, bins=False):             # <<<<<<<<<<<<<<
  *     min_dt = -max_dt
- *     bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)
+ *     bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)
  */
   __pyx_tuple__12 = PyTuple_Pack(7, __pyx_n_s_X, __pyx_n_s_Y, __pyx_n_s_max_dt, __pyx_n_s_dt_step, __pyx_n_s_bins, __pyx_n_s_min_dt, __pyx_n_s_C); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(1, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
@@ -6131,7 +6133,7 @@ if (!__Pyx_RefNanny) {
  * 
  * def crosscor(X, Y, max_dt, dt_step=1, bins=False):             # <<<<<<<<<<<<<<
  *     min_dt = -max_dt
- *     bins = np2.array(np2.arange(min_dt,max_dt,step=dt_step),dtype=np2.float64)
+ *     bins = np2.array(np2.arange(min_dt,max_dt+dt_step,step=dt_step),dtype=np2.float64)
  */
   __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_17cross_correlation_3crosscor, NULL, __pyx_n_s_cross_correlation); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
